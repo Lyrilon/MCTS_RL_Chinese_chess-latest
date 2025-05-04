@@ -1,0 +1,730 @@
+/root/CC/MCTS_RL_Chinese_chess/PolicyValueNet.py:160: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
+/root/CC/MCTS_RL_Chinese_chess/PolicyValueNet.py:160: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
+init gpu net
+**************************************************
+Restore Took 0.22763276100158691 s
+**************************************************
+[Train CChess] -> Training Start (1000 Epochs)
+game 1 begin
+game 1/ end,which takes 169.36053729057312 seconds
+[Train CChess] -> Batch 1/1000; Episode Length: [101]; Iteration: 1
+training data_buffer len: 101
+game 2 begin
+Self-Play: Round1 Over,taking 745.3668475151062
+game 2/ end,which takes 745.3670680522919 seconds
+[Train CChess] -> Batch 2/1000; Episode Length: [391]; Iteration: 2
+training data_buffer len: 492
+[Policy-Value-Net] -> Training Took 1.0332367420196533 s
+[Policy-Value-Net] -> Global Step: 219, Accuracy: 0.2227, Loss: 6.3582
+[Policy-Value-Net] -> KL Divergence:0.06255164742469788; 		Lr Multiplier:0.6666666666666666; 
+[Policy-Value-Net] -> Loss:6.358159065246582; 			Accuracy:0.22265625; 
+[Policy-Value-Net] -> Explained Var (old):-0.3269569936575001; 			Explained Var (new):-0.7531699681861899;
+
+game 3 begin
+game 3/ end,which takes 646.3682594299316 seconds
+[Train CChess] -> Batch 3/1000; Episode Length: [376]; Iteration: 3
+training data_buffer len: 868
+[Policy-Value-Net] -> Training Took 0.33515310287475586 s
+[Policy-Value-Net] -> Global Step: 220, Accuracy: 0.2148, Loss: 7.0942
+[Policy-Value-Net] -> KL Divergence:0.1114836186170578; 		Lr Multiplier:0.4444444444444444; 
+[Policy-Value-Net] -> Loss:7.094222545623779; 			Accuracy:0.21484375; 
+[Policy-Value-Net] -> Explained Var (old):-0.10801388879215912; 			Explained Var (new):-0.2298583411350581;
+
+game 4 begin
+Self-Play: Round1 Over,taking 378.9574055671692
+game 4/ end,which takes 378.9577534198761 seconds
+[Train CChess] -> Batch 4/1000; Episode Length: [199]; Iteration: 4
+training data_buffer len: 1067
+[Policy-Value-Net] -> Training Took 1.4364798069000244 s
+[Policy-Value-Net] -> Global Step: 225, Accuracy: 0.2305, Loss: 6.2432
+[Policy-Value-Net] -> KL Divergence:0.04929407313466072; 		Lr Multiplier:0.4444444444444444; 
+[Policy-Value-Net] -> Loss:6.243215560913086; 			Accuracy:0.23046875; 
+[Policy-Value-Net] -> Explained Var (old):-0.17676459558266466; 			Explained Var (new):-0.575109204881268;
+
+game 5 begin
+game 5/ end,which takes 679.9537241458893 seconds
+[Train CChess] -> Batch 5/1000; Episode Length: [345]; Iteration: 5
+training data_buffer len: 1412
+[Policy-Value-Net] -> Training Took 1.0578234195709229 s
+[Policy-Value-Net] -> Global Step: 230, Accuracy: 0.2539, Loss: 6.2424
+[Policy-Value-Net] -> KL Divergence:0.08417803049087524; 		Lr Multiplier:0.2962962962962963; 
+[Policy-Value-Net] -> Loss:6.242398262023926; 			Accuracy:0.25390625; 
+[Policy-Value-Net] -> Explained Var (old):-0.36262119464652653; 			Explained Var (new):-0.7040602449517881;
+
+game 6 begin
+Self-Play: Round1 Over,taking 896.3978607654572
+game 6/ end,which takes 896.3982281684875 seconds
+[Train CChess] -> Batch 6/1000; Episode Length: [445]; Iteration: 6
+training data_buffer len: 1857
+[Policy-Value-Net] -> Training Took 0.34265851974487305 s
+[Policy-Value-Net] -> Global Step: 231, Accuracy: 0.2617, Loss: 6.4891
+[Policy-Value-Net] -> KL Divergence:0.10108041763305664; 		Lr Multiplier:0.19753086419753085; 
+[Policy-Value-Net] -> Loss:6.489106178283691; 			Accuracy:0.26171875; 
+[Policy-Value-Net] -> Explained Var (old):-0.5869249418084848; 			Explained Var (new):-0.47001160582458223;
+
+game 7 begin
+Self-Play: Round1 Over,taking 865.7137382030487
+game 7/ end,which takes 865.7141313552856 seconds
+[Train CChess] -> Batch 7/1000; Episode Length: [420]; Iteration: 7
+training data_buffer len: 2277
+[Policy-Value-Net] -> Training Took 0.27184295654296875 s
+[Policy-Value-Net] -> Global Step: 232, Accuracy: 0.2500, Loss: 6.4159
+[Policy-Value-Net] -> KL Divergence:0.1382950246334076; 		Lr Multiplier:0.1316872427983539; 
+[Policy-Value-Net] -> Loss:6.415920257568359; 			Accuracy:0.25; 
+[Policy-Value-Net] -> Explained Var (old):-0.5596120482051723; 			Explained Var (new):-0.5569324244844844;
+
+game 8 begin
+Self-Play: Round1 Over,taking 702.7566032409668
+game 8/ end,which takes 702.7569763660431 seconds
+[Train CChess] -> Batch 8/1000; Episode Length: [393]; Iteration: 8
+training data_buffer len: 2670
+[Policy-Value-Net] -> Training Took 1.204681396484375 s
+[Policy-Value-Net] -> Global Step: 237, Accuracy: 0.2500, Loss: 6.1385
+[Policy-Value-Net] -> KL Divergence:0.06589804589748383; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.138484954833984; 			Accuracy:0.25; 
+[Policy-Value-Net] -> Explained Var (old):-0.40171295087788716; 			Explained Var (new):-0.6544557038935519;
+
+game 9 begin
+game 9/ end,which takes 446.1916124820709 seconds
+[Train CChess] -> Batch 9/1000; Episode Length: [269]; Iteration: 9
+training data_buffer len: 2939
+[Policy-Value-Net] -> Training Took 1.1607282161712646 s
+[Policy-Value-Net] -> Global Step: 242, Accuracy: 0.3203, Loss: 6.1481
+[Policy-Value-Net] -> KL Divergence:0.03960177302360535; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.148053169250488; 			Accuracy:0.3203125; 
+[Policy-Value-Net] -> Explained Var (old):-0.29234898444543655; 			Explained Var (new):-0.6498589027665203;
+
+game 10 begin
+game 10/ end,which takes 300.7463855743408 seconds
+[Train CChess] -> Batch 10/1000; Episode Length: [172]; Iteration: 10
+training data_buffer len: 3111
+[Policy-Value-Net] -> Training Took 1.0077252388000488 s
+[Policy-Value-Net] -> Global Step: 247, Accuracy: 0.2656, Loss: 5.9869
+[Policy-Value-Net] -> KL Divergence:0.03455892950296402; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.986920356750488; 			Accuracy:0.265625; 
+[Policy-Value-Net] -> Explained Var (old):-0.4021912509245835; 			Explained Var (new):-0.723593208415303;
+
+game 11 begin
+game 11/ end,which takes 726.9710972309113 seconds
+[Train CChess] -> Batch 11/1000; Episode Length: [358]; Iteration: 11
+training data_buffer len: 3469
+[Policy-Value-Net] -> Training Took 0.2505342960357666 s
+[Policy-Value-Net] -> Global Step: 248, Accuracy: 0.2773, Loss: 6.4604
+[Policy-Value-Net] -> KL Divergence:0.21451711654663086; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.460417747497559; 			Accuracy:0.27734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.3460181621079823; 			Explained Var (new):-0.5291812630729655;
+
+game 12 begin
+game 12/ end,which takes 353.02170515060425 seconds
+[Train CChess] -> Batch 12/1000; Episode Length: [211]; Iteration: 12
+training data_buffer len: 3680
+[Policy-Value-Net] -> Training Took 1.065398931503296 s
+[Policy-Value-Net] -> Global Step: 253, Accuracy: 0.2617, Loss: 6.1035
+[Policy-Value-Net] -> KL Divergence:0.03537459671497345; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.1034626960754395; 			Accuracy:0.26171875; 
+[Policy-Value-Net] -> Explained Var (old):-0.4547875552667042; 			Explained Var (new):-0.7529073041102701;
+
+game 13 begin
+Self-Play: Round1 Over,taking 733.6044626235962
+game 13/ end,which takes 733.6047441959381 seconds
+[Train CChess] -> Batch 13/1000; Episode Length: [427]; Iteration: 13
+training data_buffer len: 4107
+[Policy-Value-Net] -> Training Took 0.38193631172180176 s
+[Policy-Value-Net] -> Global Step: 254, Accuracy: 0.2539, Loss: 6.3141
+[Policy-Value-Net] -> KL Divergence:0.11320240795612335; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.314114093780518; 			Accuracy:0.25390625; 
+[Policy-Value-Net] -> Explained Var (old):-0.38169893146221723; 			Explained Var (new):-0.6110706046146948;
+
+game 14 begin
+Self-Play: Round1 Over,taking 661.5548567771912
+game 14/ end,which takes 661.5553052425385 seconds
+[Train CChess] -> Batch 14/1000; Episode Length: [393]; Iteration: 14
+training data_buffer len: 4500
+[Policy-Value-Net] -> Training Took 1.3013157844543457 s
+[Policy-Value-Net] -> Global Step: 259, Accuracy: 0.2734, Loss: 6.0847
+[Policy-Value-Net] -> KL Divergence:0.06820264458656311; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.084712982177734; 			Accuracy:0.2734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.5366697175369814; 			Explained Var (new):-0.7654608424673068;
+
+game 15 begin
+Self-Play: Round1 Over,taking 339.0602593421936
+game 15/ end,which takes 339.0606470108032 seconds
+[Train CChess] -> Batch 15/1000; Episode Length: [194]; Iteration: 15
+training data_buffer len: 4694
+[Policy-Value-Net] -> Training Took 1.391982078552246 s
+[Policy-Value-Net] -> Global Step: 264, Accuracy: 0.2617, Loss: 6.0455
+[Policy-Value-Net] -> KL Divergence:0.027743149548768997; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.045523166656494; 			Accuracy:0.26171875; 
+[Policy-Value-Net] -> Explained Var (old):-0.5931160528705335; 			Explained Var (new):-0.8252901272775646;
+
+game 16 begin
+game 16/ end,which takes 146.28777384757996 seconds
+[Train CChess] -> Batch 16/1000; Episode Length: [66]; Iteration: 16
+training data_buffer len: 4760
+[Policy-Value-Net] -> Training Took 1.1353211402893066 s
+[Policy-Value-Net] -> Global Step: 269, Accuracy: 0.3086, Loss: 5.9461
+[Policy-Value-Net] -> KL Divergence:0.06016984581947327; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.946086883544922; 			Accuracy:0.30859375; 
+[Policy-Value-Net] -> Explained Var (old):-0.5655362726424686; 			Explained Var (new):-0.8368684666906623;
+
+game 17 begin
+Self-Play: Round1 Over,taking 108.84411764144897
+game 17/ end,which takes 108.84437251091003 seconds
+[Train CChess] -> Batch 17/1000; Episode Length: [60]; Iteration: 17
+training data_buffer len: 4820
+[Policy-Value-Net] -> Training Took 1.4268643856048584 s
+[Policy-Value-Net] -> Global Step: 274, Accuracy: 0.2891, Loss: 5.9894
+[Policy-Value-Net] -> KL Divergence:0.06330522894859314; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.989405155181885; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6922895278314565; 			Explained Var (new):-0.8638382468353694;
+
+game 18 begin
+game 18/ end,which takes 358.59450244903564 seconds
+[Train CChess] -> Batch 18/1000; Episode Length: [217]; Iteration: 18
+training data_buffer len: 5037
+[Policy-Value-Net] -> Training Took 0.3303830623626709 s
+[Policy-Value-Net] -> Global Step: 275, Accuracy: 0.2656, Loss: 5.9628
+[Policy-Value-Net] -> KL Divergence:0.11672839522361755; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.962848663330078; 			Accuracy:0.265625; 
+[Policy-Value-Net] -> Explained Var (old):-0.7195700367460192; 			Explained Var (new):-0.749902648732212;
+
+game 19 begin
+game 19/ end,which takes 338.9195420742035 seconds
+[Train CChess] -> Batch 19/1000; Episode Length: [199]; Iteration: 19
+training data_buffer len: 5236
+[Policy-Value-Net] -> Training Took 0.4274437427520752 s
+[Policy-Value-Net] -> Global Step: 276, Accuracy: 0.2305, Loss: 6.1122
+[Policy-Value-Net] -> KL Divergence:0.12480106949806213; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.112183570861816; 			Accuracy:0.23046875; 
+[Policy-Value-Net] -> Explained Var (old):-0.5663633864487598; 			Explained Var (new):-0.6716899683019504;
+
+game 20 begin
+Self-Play: Round1 Over,taking 487.57212233543396
+game 20/ end,which takes 487.57246804237366 seconds
+[Train CChess] -> Batch 20/1000; Episode Length: [305]; Iteration: 20
+training data_buffer len: 5541
+[Policy-Value-Net] -> Training Took 0.29157400131225586 s
+[Policy-Value-Net] -> Global Step: 277, Accuracy: 0.2344, Loss: 6.2157
+[Policy-Value-Net] -> KL Divergence:0.20347097516059875; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:6.215667247772217; 			Accuracy:0.234375; 
+[Policy-Value-Net] -> Explained Var (old):-0.4267280029784273; 			Explained Var (new):-0.6354100020323861;
+
+game 21 begin
+game 21/ end,which takes 191.48680210113525 seconds
+[Train CChess] -> Batch 21/1000; Episode Length: [110]; Iteration: 21
+training data_buffer len: 5651
+[Policy-Value-Net] -> Training Took 1.5743210315704346 s
+[Policy-Value-Net] -> Global Step: 282, Accuracy: 0.2773, Loss: 5.8088
+[Policy-Value-Net] -> KL Divergence:0.040166329592466354; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.808819770812988; 			Accuracy:0.27734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.6143061756830772; 			Explained Var (new):-0.7694016273293844;
+
+game 22 begin
+Self-Play: Round1 Over,taking 549.6536610126495
+game 22/ end,which takes 549.6540699005127 seconds
+[Train CChess] -> Batch 22/1000; Episode Length: [311]; Iteration: 22
+training data_buffer len: 5962
+[Policy-Value-Net] -> Training Took 1.7022311687469482 s
+[Policy-Value-Net] -> Global Step: 287, Accuracy: 0.3125, Loss: 5.8075
+[Policy-Value-Net] -> KL Divergence:0.07978707551956177; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.807462692260742; 			Accuracy:0.3125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6780713783108672; 			Explained Var (new):-0.8521311460067389;
+
+game 23 begin
+Self-Play: Round1 Over,taking 716.6964318752289
+game 23/ end,which takes 716.6969361305237 seconds
+[Train CChess] -> Batch 23/1000; Episode Length: [395]; Iteration: 23
+training data_buffer len: 6357
+[Policy-Value-Net] -> Training Took 0.3371551036834717 s
+[Policy-Value-Net] -> Global Step: 288, Accuracy: 0.2852, Loss: 5.9595
+[Policy-Value-Net] -> KL Divergence:0.18463535606861115; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.959526538848877; 			Accuracy:0.28515625; 
+[Policy-Value-Net] -> Explained Var (old):-0.8085861177855376; 			Explained Var (new):-0.767271773975186;
+
+game 24 begin
+Self-Play: Round1 Over,taking 423.98593854904175
+game 24/ end,which takes 423.98633456230164 seconds
+[Train CChess] -> Batch 24/1000; Episode Length: [250]; Iteration: 24
+training data_buffer len: 6607
+[Policy-Value-Net] -> Training Took 1.4293947219848633 s
+[Policy-Value-Net] -> Global Step: 293, Accuracy: 0.2539, Loss: 5.7675
+[Policy-Value-Net] -> KL Divergence:0.09814411401748657; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.767505168914795; 			Accuracy:0.25390625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6058679947512398; 			Explained Var (new):-0.8394198411977427;
+
+game 25 begin
+Self-Play: Round1 Over,taking 453.9195017814636
+game 25/ end,which takes 453.9198544025421 seconds
+[Train CChess] -> Batch 25/1000; Episode Length: [221]; Iteration: 25
+training data_buffer len: 6828
+[Policy-Value-Net] -> Training Took 1.0916571617126465 s
+[Policy-Value-Net] -> Global Step: 298, Accuracy: 0.2578, Loss: 5.6892
+[Policy-Value-Net] -> KL Divergence:0.0439806766808033; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.689228057861328; 			Accuracy:0.2578125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6733946058166109; 			Explained Var (new):-0.8381532485983125;
+
+game 26 begin
+Self-Play: Round1 Over,taking 587.6075620651245
+game 26/ end,which takes 587.6078436374664 seconds
+[Train CChess] -> Batch 26/1000; Episode Length: [349]; Iteration: 26
+training data_buffer len: 7177
+[Policy-Value-Net] -> Training Took 1.6104118824005127 s
+[Policy-Value-Net] -> Global Step: 303, Accuracy: 0.3164, Loss: 5.8257
+[Policy-Value-Net] -> KL Divergence:0.0699070394039154; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.825657844543457; 			Accuracy:0.31640625; 
+[Policy-Value-Net] -> Explained Var (old):-0.7293758668521446; 			Explained Var (new):-0.8422180854019616;
+
+game 27 begin
+Self-Play: Round1 Over,taking 443.9772324562073
+game 27/ end,which takes 443.97760033607483 seconds
+[Train CChess] -> Batch 27/1000; Episode Length: [257]; Iteration: 27
+training data_buffer len: 7434
+[Policy-Value-Net] -> Training Took 1.0286459922790527 s
+[Policy-Value-Net] -> Global Step: 308, Accuracy: 0.3359, Loss: 5.6617
+[Policy-Value-Net] -> KL Divergence:0.056239061057567596; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.661693572998047; 			Accuracy:0.3359375; 
+[Policy-Value-Net] -> Explained Var (old):-0.576666369905718; 			Explained Var (new):-0.8616873023453007;
+
+game 28 begin
+Self-Play: Round1 Over,taking 724.9772758483887
+game 28/ end,which takes 724.9775092601776 seconds
+[Train CChess] -> Batch 28/1000; Episode Length: [420]; Iteration: 28
+training data_buffer len: 7854
+[Policy-Value-Net] -> Training Took 0.2723867893218994 s
+[Policy-Value-Net] -> Global Step: 309, Accuracy: 0.2656, Loss: 5.9562
+[Policy-Value-Net] -> KL Divergence:0.23040619492530823; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.956225395202637; 			Accuracy:0.265625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6454651019458524; 			Explained Var (new):-0.8201429681217134;
+
+game 29 begin
+Self-Play: Round1 Over,taking 726.2217276096344
+game 29/ end,which takes 726.2220969200134 seconds
+[Train CChess] -> Batch 29/1000; Episode Length: [438]; Iteration: 29
+training data_buffer len: 8292
+[Policy-Value-Net] -> Training Took 0.24658799171447754 s
+[Policy-Value-Net] -> Global Step: 310, Accuracy: 0.2891, Loss: 5.8456
+[Policy-Value-Net] -> KL Divergence:0.1414760947227478; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.845574378967285; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6037666914182152; 			Explained Var (new):-0.7606523099949556;
+
+game 30 begin
+game 30/ end,which takes 247.1356954574585 seconds
+[Train CChess] -> Batch 30/1000; Episode Length: [137]; Iteration: 30
+training data_buffer len: 8429
+[Policy-Value-Net] -> Training Took 1.0896263122558594 s
+[Policy-Value-Net] -> Global Step: 315, Accuracy: 0.2891, Loss: 5.7825
+[Policy-Value-Net] -> KL Divergence:0.04526139050722122; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.782516002655029; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6461453698982322; 			Explained Var (new):-0.8133701491130556;
+
+game 31 begin
+Self-Play: Round1 Over,taking 480.15946531295776
+game 31/ end,which takes 480.15967082977295 seconds
+[Train CChess] -> Batch 31/1000; Episode Length: [276]; Iteration: 31
+training data_buffer len: 8705
+[Policy-Value-Net] -> Training Took 1.4189648628234863 s
+[Policy-Value-Net] -> Global Step: 320, Accuracy: 0.2891, Loss: 5.5832
+[Policy-Value-Net] -> KL Divergence:0.06522789597511292; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.583215713500977; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.7528944236801833; 			Explained Var (new):-0.8781681677520545;
+
+game 32 begin
+game 32/ end,which takes 529.950042963028 seconds
+[Train CChess] -> Batch 32/1000; Episode Length: [307]; Iteration: 32
+training data_buffer len: 9012
+[Policy-Value-Net] -> Training Took 1.3689665794372559 s
+[Policy-Value-Net] -> Global Step: 325, Accuracy: 0.3281, Loss: 5.6199
+[Policy-Value-Net] -> KL Divergence:0.07301861047744751; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.619920253753662; 			Accuracy:0.328125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6115926806507395; 			Explained Var (new):-0.8077855885938536;
+
+game 33 begin
+game 33/ end,which takes 331.7630796432495 seconds
+[Train CChess] -> Batch 33/1000; Episode Length: [194]; Iteration: 33
+training data_buffer len: 9206
+[Policy-Value-Net] -> Training Took 1.0531659126281738 s
+[Policy-Value-Net] -> Global Step: 330, Accuracy: 0.2539, Loss: 5.6682
+[Policy-Value-Net] -> KL Divergence:0.03852047771215439; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.668201923370361; 			Accuracy:0.25390625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6575448247543574; 			Explained Var (new):-0.8367736570451141;
+
+game 34 begin
+game 34/ end,which takes 78.62688755989075 seconds
+[Train CChess] -> Batch 34/1000; Episode Length: [42]; Iteration: 34
+training data_buffer len: 9248
+[Policy-Value-Net] -> Training Took 1.6048855781555176 s
+[Policy-Value-Net] -> Global Step: 335, Accuracy: 0.3320, Loss: 5.6740
+[Policy-Value-Net] -> KL Divergence:0.09872088581323624; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.674046993255615; 			Accuracy:0.33203125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5615143516404593; 			Explained Var (new):-0.82622125667503;
+
+game 35 begin
+game 35/ end,which takes 327.9691915512085 seconds
+[Train CChess] -> Batch 35/1000; Episode Length: [200]; Iteration: 35
+training data_buffer len: 9448
+[Policy-Value-Net] -> Training Took 1.3129799365997314 s
+[Policy-Value-Net] -> Global Step: 340, Accuracy: 0.2891, Loss: 5.6782
+[Policy-Value-Net] -> KL Divergence:0.059904422610998154; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.678243637084961; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6062439951281511; 			Explained Var (new):-0.8447626968435928;
+
+game 36 begin
+Self-Play: Round1 Over,taking 285.26064133644104
+game 36/ end,which takes 285.26101183891296 seconds
+[Train CChess] -> Batch 36/1000; Episode Length: [159]; Iteration: 36
+training data_buffer len: 9607
+[Policy-Value-Net] -> Training Took 1.2983543872833252 s
+[Policy-Value-Net] -> Global Step: 345, Accuracy: 0.3086, Loss: 5.4528
+[Policy-Value-Net] -> KL Divergence:0.08179473876953125; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.4528398513793945; 			Accuracy:0.30859375; 
+[Policy-Value-Net] -> Explained Var (old):-0.7575084923896693; 			Explained Var (new):-0.8177150338604997;
+
+game 37 begin
+Self-Play: Round1 Over,taking 696.2339475154877
+game 37/ end,which takes 696.2343308925629 seconds
+[Train CChess] -> Batch 37/1000; Episode Length: [432]; Iteration: 37
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.31823205947875977 s
+[Policy-Value-Net] -> Global Step: 346, Accuracy: 0.3008, Loss: 5.6583
+[Policy-Value-Net] -> KL Divergence:0.18967589735984802; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.658275604248047; 			Accuracy:0.30078125; 
+[Policy-Value-Net] -> Explained Var (old):-0.631623692122943; 			Explained Var (new):-0.7704994942511589;
+
+game 38 begin
+game 38/ end,which takes 330.8681240081787 seconds
+[Train CChess] -> Batch 38/1000; Episode Length: [192]; Iteration: 38
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.2347567081451416 s
+[Policy-Value-Net] -> Global Step: 347, Accuracy: 0.2773, Loss: 5.7422
+[Policy-Value-Net] -> KL Divergence:0.20429904758930206; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.742197513580322; 			Accuracy:0.27734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.6850397250376719; 			Explained Var (new):-0.6703302978367618;
+
+game 39 begin
+game 39/ end,which takes 105.41639399528503 seconds
+[Train CChess] -> Batch 39/1000; Episode Length: [60]; Iteration: 39
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.316901683807373 s
+[Policy-Value-Net] -> Global Step: 352, Accuracy: 0.3320, Loss: 5.5693
+[Policy-Value-Net] -> KL Divergence:0.05873739346861839; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.569279193878174; 			Accuracy:0.33203125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5559868340106038; 			Explained Var (new):-0.774744664869297;
+
+game 40 begin
+game 40/ end,which takes 618.7288870811462 seconds
+[Train CChess] -> Batch 40/1000; Episode Length: [358]; Iteration: 40
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.315047025680542 s
+[Policy-Value-Net] -> Global Step: 353, Accuracy: 0.3320, Loss: 5.8253
+[Policy-Value-Net] -> KL Divergence:0.15097033977508545; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.825319290161133; 			Accuracy:0.33203125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5615214671689319; 			Explained Var (new):-0.6745705608542631;
+
+game 41 begin
+game 41/ end,which takes 488.1019947528839 seconds
+[Train CChess] -> Batch 41/1000; Episode Length: [280]; Iteration: 41
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.30490732192993164 s
+[Policy-Value-Net] -> Global Step: 354, Accuracy: 0.2852, Loss: 5.8422
+[Policy-Value-Net] -> KL Divergence:0.11687669157981873; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.842198848724365; 			Accuracy:0.28515625; 
+[Policy-Value-Net] -> Explained Var (old):-0.5189109221776245; 			Explained Var (new):-0.6135382788308597;
+
+game 42 begin
+game 42/ end,which takes 518.5230937004089 seconds
+[Train CChess] -> Batch 42/1000; Episode Length: [293]; Iteration: 42
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.718442678451538 s
+[Policy-Value-Net] -> Global Step: 359, Accuracy: 0.3164, Loss: 5.5911
+[Policy-Value-Net] -> KL Divergence:0.08200851082801819; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.591088771820068; 			Accuracy:0.31640625; 
+[Policy-Value-Net] -> Explained Var (old):-0.4131788280704316; 			Explained Var (new):-0.777462948747415;
+
+game 43 begin
+game 43/ end,which takes 282.1142508983612 seconds
+[Train CChess] -> Batch 43/1000; Episode Length: [163]; Iteration: 43
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.0532419681549072 s
+[Policy-Value-Net] -> Global Step: 364, Accuracy: 0.2930, Loss: 5.4465
+[Policy-Value-Net] -> KL Divergence:0.0685630515217781; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.446470260620117; 			Accuracy:0.29296875; 
+[Policy-Value-Net] -> Explained Var (old):-0.713796828851587; 			Explained Var (new):-0.8355118435835138;
+
+game 44 begin
+Self-Play: Round1 Over,taking 456.33803820610046
+game 44/ end,which takes 456.33825421333313 seconds
+[Train CChess] -> Batch 44/1000; Episode Length: [260]; Iteration: 44
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.25031518936157227 s
+[Policy-Value-Net] -> Global Step: 365, Accuracy: 0.3086, Loss: 5.8692
+[Policy-Value-Net] -> KL Divergence:0.10366789996623993; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.869163990020752; 			Accuracy:0.30859375; 
+[Policy-Value-Net] -> Explained Var (old):-0.5649744434300454; 			Explained Var (new):-0.6224913247599135;
+
+game 45 begin
+Self-Play: Round1 Over,taking 733.5964522361755
+game 45/ end,which takes 733.5967264175415 seconds
+[Train CChess] -> Batch 45/1000; Episode Length: [426]; Iteration: 45
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.698732852935791 s
+[Policy-Value-Net] -> Global Step: 370, Accuracy: 0.3359, Loss: 5.4050
+[Policy-Value-Net] -> KL Divergence:0.10284766554832458; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.405004024505615; 			Accuracy:0.3359375; 
+[Policy-Value-Net] -> Explained Var (old):-0.5184182004534497; 			Explained Var (new):-0.8003420170015294;
+
+game 46 begin
+Self-Play: Round1 Over,taking 492.08589696884155
+game 46/ end,which takes 492.08624601364136 seconds
+[Train CChess] -> Batch 46/1000; Episode Length: [277]; Iteration: 46
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.3000750541687012 s
+[Policy-Value-Net] -> Global Step: 375, Accuracy: 0.3359, Loss: 5.3899
+[Policy-Value-Net] -> KL Divergence:0.08095492422580719; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.389878749847412; 			Accuracy:0.3359375; 
+[Policy-Value-Net] -> Explained Var (old):-0.5366813600411029; 			Explained Var (new):-0.8280452180219806;
+
+game 47 begin
+Self-Play: Round1 Over,taking 621.9628248214722
+game 47/ end,which takes 621.9631772041321 seconds
+[Train CChess] -> Batch 47/1000; Episode Length: [322]; Iteration: 47
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.3270909786224365 s
+[Policy-Value-Net] -> Global Step: 376, Accuracy: 0.2773, Loss: 5.9088
+[Policy-Value-Net] -> KL Divergence:0.19991189241409302; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.9087629318237305; 			Accuracy:0.27734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.646206184918628; 			Explained Var (new):-0.6191199598084529;
+
+game 48 begin
+game 48/ end,which takes 408.2985713481903 seconds
+[Train CChess] -> Batch 48/1000; Episode Length: [193]; Iteration: 48
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.34235215187072754 s
+[Policy-Value-Net] -> Global Step: 377, Accuracy: 0.2734, Loss: 5.5377
+[Policy-Value-Net] -> KL Divergence:0.13998903334140778; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.537686824798584; 			Accuracy:0.2734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.6009057445365884; 			Explained Var (new):-0.6236234605383963;
+
+game 49 begin
+Self-Play: Round1 Over,taking 541.8648312091827
+game 49/ end,which takes 541.8652234077454 seconds
+[Train CChess] -> Batch 49/1000; Episode Length: [308]; Iteration: 49
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.26743125915527344 s
+[Policy-Value-Net] -> Global Step: 378, Accuracy: 0.2266, Loss: 5.7949
+[Policy-Value-Net] -> KL Divergence:0.10016286373138428; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.7949299812316895; 			Accuracy:0.2265625; 
+[Policy-Value-Net] -> Explained Var (old):-0.6049564922136557; 			Explained Var (new):-0.5742634505835464;
+
+game 50 begin
+game 50/ end,which takes 502.6670398712158 seconds
+[Train CChess] -> Batch 50/1000; Episode Length: [214]; Iteration: 50
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.797116994857788 s
+[Policy-Value-Net] -> Global Step: 383, Accuracy: 0.3125, Loss: 5.4491
+[Policy-Value-Net] -> KL Divergence:0.07481124997138977; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.449068069458008; 			Accuracy:0.3125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5170235066665072; 			Explained Var (new):-0.8090063557890084;
+
+game 51 begin
+game 51/ end,which takes 291.4368932247162 seconds
+[Train CChess] -> Batch 51/1000; Episode Length: [147]; Iteration: 51
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.3364629745483398 s
+[Policy-Value-Net] -> Global Step: 388, Accuracy: 0.2852, Loss: 5.3370
+[Policy-Value-Net] -> KL Divergence:0.049832530319690704; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.337033748626709; 			Accuracy:0.28515625; 
+[Policy-Value-Net] -> Explained Var (old):-0.40175005183451695; 			Explained Var (new):-0.8266295051507333;
+
+game 52 begin
+Self-Play: Round1 Over,taking 417.3490571975708
+game 52/ end,which takes 417.3494164943695 seconds
+[Train CChess] -> Batch 52/1000; Episode Length: [239]; Iteration: 52
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.30664920806884766 s
+[Policy-Value-Net] -> Global Step: 389, Accuracy: 0.2578, Loss: 5.6011
+[Policy-Value-Net] -> KL Divergence:0.153346985578537; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.601146221160889; 			Accuracy:0.2578125; 
+[Policy-Value-Net] -> Explained Var (old):-0.62137983481127; 			Explained Var (new):-0.6727925813735216;
+
+game 53 begin
+Self-Play: Round1 Over,taking 645.1963710784912
+game 53/ end,which takes 645.1967356204987 seconds
+[Train CChess] -> Batch 53/1000; Episode Length: [314]; Iteration: 53
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.37279295921325684 s
+[Policy-Value-Net] -> Global Step: 390, Accuracy: 0.1953, Loss: 5.6013
+[Policy-Value-Net] -> KL Divergence:0.11179431527853012; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.601329803466797; 			Accuracy:0.1953125; 
+[Policy-Value-Net] -> Explained Var (old):-0.7107147884345977; 			Explained Var (new):-0.7297433756765883;
+
+game 54 begin
+game 54/ end,which takes 228.4086639881134 seconds
+[Train CChess] -> Batch 54/1000; Episode Length: [122]; Iteration: 54
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.0200281143188477 s
+[Policy-Value-Net] -> Global Step: 395, Accuracy: 0.2852, Loss: 5.4132
+[Policy-Value-Net] -> KL Divergence:0.09390801191329956; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.4131693840026855; 			Accuracy:0.28515625; 
+[Policy-Value-Net] -> Explained Var (old):-0.611461430772613; 			Explained Var (new):-0.8779329951136485;
+
+game 55 begin
+game 55/ end,which takes 417.5732033252716 seconds
+[Train CChess] -> Batch 55/1000; Episode Length: [234]; Iteration: 55
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.26062488555908203 s
+[Policy-Value-Net] -> Global Step: 396, Accuracy: 0.3086, Loss: 5.5512
+[Policy-Value-Net] -> KL Divergence:0.10791508853435516; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.551210403442383; 			Accuracy:0.30859375; 
+[Policy-Value-Net] -> Explained Var (old):-0.4828045703198349; 			Explained Var (new):-0.5835108679999648;
+
+game 56 begin
+Self-Play: Round1 Over,taking 738.8380997180939
+game 56/ end,which takes 738.838418006897 seconds
+[Train CChess] -> Batch 56/1000; Episode Length: [360]; Iteration: 56
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.8935649394989014 s
+[Policy-Value-Net] -> Global Step: 401, Accuracy: 0.3047, Loss: 5.2158
+[Policy-Value-Net] -> KL Divergence:0.0990072712302208; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.215827465057373; 			Accuracy:0.3046875; 
+[Policy-Value-Net] -> Explained Var (old):-0.5514383665268201; 			Explained Var (new):-0.8557225536341568;
+
+game 57 begin
+game 57/ end,which takes 648.4936277866364 seconds
+[Train CChess] -> Batch 57/1000; Episode Length: [257]; Iteration: 57
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 2.2523036003112793 s
+[Policy-Value-Net] -> Global Step: 406, Accuracy: 0.2891, Loss: 5.3756
+[Policy-Value-Net] -> KL Divergence:0.07638534903526306; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.375587463378906; 			Accuracy:0.2890625; 
+[Policy-Value-Net] -> Explained Var (old):-0.65632419497677; 			Explained Var (new):-0.7960797457014404;
+
+game 58 begin
+Self-Play: Round1 Over,taking 801.9416165351868
+game 58/ end,which takes 801.9420480728149 seconds
+[Train CChess] -> Batch 58/1000; Episode Length: [323]; Iteration: 58
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.2749333381652832 s
+[Policy-Value-Net] -> Global Step: 407, Accuracy: 0.2461, Loss: 5.6069
+[Policy-Value-Net] -> KL Divergence:0.11380210518836975; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.606904029846191; 			Accuracy:0.24609375; 
+[Policy-Value-Net] -> Explained Var (old):-0.639710454312989; 			Explained Var (new):-0.6544571143446285;
+
+game 59 begin
+Self-Play: Round1 Over,taking 565.1706428527832
+game 59/ end,which takes 565.1709749698639 seconds
+[Train CChess] -> Batch 59/1000; Episode Length: [269]; Iteration: 59
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 2.3435897827148438 s
+[Policy-Value-Net] -> Global Step: 412, Accuracy: 0.2695, Loss: 5.2650
+[Policy-Value-Net] -> KL Divergence:0.09261759370565414; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.265003204345703; 			Accuracy:0.26953125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6031182064248768; 			Explained Var (new):-0.844934649750591;
+
+game 60 begin
+game 60/ end,which takes 770.0728800296783 seconds
+[Train CChess] -> Batch 60/1000; Episode Length: [379]; Iteration: 60
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.23701953887939453 s
+[Policy-Value-Net] -> Global Step: 413, Accuracy: 0.3008, Loss: 5.7412
+[Policy-Value-Net] -> KL Divergence:0.19938740134239197; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.74119758605957; 			Accuracy:0.30078125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6760990595574723; 			Explained Var (new):-0.6088010005700843;
+
+game 61 begin
+game 61/ end,which takes 448.0727381706238 seconds
+[Train CChess] -> Batch 61/1000; Episode Length: [205]; Iteration: 61
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.7031376361846924 s
+[Policy-Value-Net] -> Global Step: 418, Accuracy: 0.2930, Loss: 5.3274
+[Policy-Value-Net] -> KL Divergence:0.07318324595689774; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.327398777008057; 			Accuracy:0.29296875; 
+[Policy-Value-Net] -> Explained Var (old):-0.5916598439058556; 			Explained Var (new):-0.7899686560443004;
+
+game 62 begin
+Self-Play: Round1 Over,taking 564.4716737270355
+game 62/ end,which takes 564.472249507904 seconds
+[Train CChess] -> Batch 62/1000; Episode Length: [269]; Iteration: 62
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.3307759761810303 s
+[Policy-Value-Net] -> Global Step: 423, Accuracy: 0.3242, Loss: 5.1963
+[Policy-Value-Net] -> KL Divergence:0.08933763206005096; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.196293830871582; 			Accuracy:0.32421875; 
+[Policy-Value-Net] -> Explained Var (old):-0.6559406516139112; 			Explained Var (new):-0.8218354007483668;
+
+game 63 begin
+game 63/ end,which takes 432.08320474624634 seconds
+[Train CChess] -> Batch 63/1000; Episode Length: [259]; Iteration: 63
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.2905559539794922 s
+[Policy-Value-Net] -> Global Step: 424, Accuracy: 0.2500, Loss: 5.5330
+[Policy-Value-Net] -> KL Divergence:0.16346390545368195; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.532950401306152; 			Accuracy:0.25; 
+[Policy-Value-Net] -> Explained Var (old):-0.6695883869492294; 			Explained Var (new):-0.7240352429651562;
+
+game 64 begin
+game 64/ end,which takes 228.87560987472534 seconds
+[Train CChess] -> Batch 64/1000; Episode Length: [115]; Iteration: 64
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.9237606525421143 s
+[Policy-Value-Net] -> Global Step: 429, Accuracy: 0.3633, Loss: 5.2554
+[Policy-Value-Net] -> KL Divergence:0.0532192662358284; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.255395412445068; 			Accuracy:0.36328125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5665164024232345; 			Explained Var (new):-0.8188732790636684;
+
+game 65 begin
+game 65/ end,which takes 894.7698450088501 seconds
+[Train CChess] -> Batch 65/1000; Episode Length: [403]; Iteration: 65
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.32958269119262695 s
+[Policy-Value-Net] -> Global Step: 430, Accuracy: 0.2773, Loss: 5.4966
+[Policy-Value-Net] -> KL Divergence:0.1730036437511444; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.4966325759887695; 			Accuracy:0.27734375; 
+[Policy-Value-Net] -> Explained Var (old):-0.7164136846994038; 			Explained Var (new):-0.6170342950350429;
+
+game 66 begin
+game 66/ end,which takes 525.3351073265076 seconds
+[Train CChess] -> Batch 66/1000; Episode Length: [218]; Iteration: 66
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.336458444595337 s
+[Policy-Value-Net] -> Global Step: 435, Accuracy: 0.2695, Loss: 5.0140
+[Policy-Value-Net] -> KL Divergence:0.05874567851424217; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.014008522033691; 			Accuracy:0.26953125; 
+[Policy-Value-Net] -> Explained Var (old):-0.5827375599395404; 			Explained Var (new):-0.8457490375985737;
+
+game 67 begin
+game 67/ end,which takes 238.70119833946228 seconds
+[Train CChess] -> Batch 67/1000; Episode Length: [109]; Iteration: 67
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.5722370147705078 s
+[Policy-Value-Net] -> Global Step: 440, Accuracy: 0.3008, Loss: 5.1954
+[Policy-Value-Net] -> KL Divergence:0.0672493726015091; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.195353031158447; 			Accuracy:0.30078125; 
+[Policy-Value-Net] -> Explained Var (old):-0.6446864851928058; 			Explained Var (new):-0.8450033086855864;
+
+game 68 begin
+game 68/ end,which takes 621.4363977909088 seconds
+[Train CChess] -> Batch 68/1000; Episode Length: [341]; Iteration: 68
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 0.35640954971313477 s
+[Policy-Value-Net] -> Global Step: 441, Accuracy: 0.2852, Loss: 5.5013
+[Policy-Value-Net] -> KL Divergence:0.16577894985675812; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.501269340515137; 			Accuracy:0.28515625; 
+[Policy-Value-Net] -> Explained Var (old):-0.5943972244555682; 			Explained Var (new):-0.6939091809998601;
+
+game 69 begin
+Self-Play: Round1 Over,taking 734.9230992794037
+game 69/ end,which takes 734.9234509468079 seconds
+[Train CChess] -> Batch 69/1000; Episode Length: [287]; Iteration: 69
+training data_buffer len: 10000
+[Policy-Value-Net] -> Training Took 1.524838924407959 s
+[Policy-Value-Net] -> Global Step: 446, Accuracy: 0.3047, Loss: 5.1261
+[Policy-Value-Net] -> KL Divergence:0.08624205738306046; 		Lr Multiplier:0.0877914951989026; 
+[Policy-Value-Net] -> Loss:5.126115322113037; 			Accuracy:0.3046875; 
+[Policy-Value-Net] -> Explained Var (old):-0.6040966000810668; 			Explained Var (new):-0.8386369130482236;
+
+game 70 begin
+game 70/ end,which takes 349.1839392185211 seconds
+[Train CChess] -> Batch 70/1000; Episode Length: [158]; Iteration: 70
+training data_buffer len: 10000
