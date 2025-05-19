@@ -681,12 +681,12 @@ class Mcts():
         self.root.parent = None
 class leaf_node(object):
     def __init__(self, in_parent, in_prior_p, in_state):
-        self.P = in_prior_p
-        self.Q = 0
-        self.N = 0
-        self.v = 0
-        self.U = 0
-        self.W = 0
+        self.P = in_prior_p # 神经网路给出的先验概率 P(s,a)，用于在选择阶段计算 UCB/PUCT 的探索项
+        self.Q = 0 # Q(s,a) = W/N,用于反映节点历史模拟的平均回报
+        self.N = 0 # 访问次数
+        self.v = 0 # backup value的值
+        self.U = 0 # 探索项 U = c_puct·P·√(parent.N)/(1+N)，与 Q 共同决定选择节点
+        self.W = 0 # 累计价值和 
         self.parent = in_parent
         self.child = {}
         self.state = in_state

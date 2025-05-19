@@ -1,4 +1,16 @@
 import numpy as np
+
+'''
+状态字符编码方式介绍：
+首先使用KARBNPCkarbnpc表示棋子
+In English ,we see KARBNPCkarbnpc as king, advisor, rook, bishop, knight, pawn, cannon
+炮和兵的编码字母是 C和 P
+并且在遇到连续空位置的时候用数字表示，数字表示连续的空位置的个数
+在换行的时候使用"/"表示
+'''
+
+
+# from string with "2" to "11", "3" to "111", ..., "9" to "111111111",which means unfold a compressed board
 def replace_board_tags(board):
     board = board.replace("2", "11")
     board = board.replace("3", "111")
@@ -9,19 +21,30 @@ def replace_board_tags(board):
     board = board.replace("8", "11111111")
     board = board.replace("9", "111111111")
     return board.replace("/", "")
+
 pieces_order = 'KARBNPCkarbnpc' # 9 x 10 x 14
+
+# ind is for mapping the pieces to the index.means 14 kinds of pieces,which ultimately transfered to 14 channels
+# from 'KARBNPCkarbnpc' to 0-13
 ind = {pieces_order[i]: i for i in range(14)}
 
+
+# we firstly transform the board state to a string
 def state_to_positions(state):
     board_state = replace_board_tags(state)
     pieces_plane = np.zeros(shape=(9, 10, 14), dtype=np.float32)
-    for rank in range(9):    #横线
-        for file in range(10):    #直线
-            v = board_state[rank * 9 + file]
+    for row in range(10):
+        for col in range(9):
+            v = board_state[row * 9 + col]
             if v.isalpha():
-                pieces_plane[rank][file][ind[v]] = 1
+                pieces_plane[col][row][ind[v]] = 1
+
     assert pieces_plane.shape == (9, 10, 14)
     return pieces_plane
+
+# 返回十四张特征图
+
+
 
 def input_preprocess(state,player):
     def swapcase(a):
@@ -31,12 +54,23 @@ def input_preprocess(state,player):
         #对所有大小写互转
     def swapall(aa):
         return "".join([swapcase(a) for a in aa])
+    # 黑方对于状态的处理，需要翻转大小写，与此同时
     if player == 'b':
         rows = state.split('/')
         state = "/".join([swapall(row) for row in reversed(rows)])
     state = state_to_positions(state)
     state = np.expand_dims(state,0)
     return state
+
+# 测试input_preprocess函数
+if __name__ == "__main__":
+    # 测试用例
+    state = "RNBA1ABNR/9/1C5C1/1P1P1P1P1/9/9/9/9/9/1p1p1p1p1/1c5c1/9/rnbakabnr"
+    player = 'r'
+    result = input_preprocess(state, player)
+    print(result.shape)  # 输出 (1, 9, 10, 14)
+    # 输出第一张特征图
+    print(result[0, :, :, 0])  # 输出第一张特征图
 
 
 import os
@@ -57,7 +91,19 @@ def raise_error(file, line, message ,color="red"):
         print('\033[1;33;1m<USER ERROR> <File: %s> <Line: %s>\n\t%s<Msg: %s>\033[0m'%(file, line, " "*5, message))
 
 
-# 定义残差块模块
+# 定义残差块模块,此处的momentum是BN的momentum，用于BN的滑动平均
+
+'''
+momentum的设置问题：
+1. momentum=0.9: 适用于大批量训练，滑动平均较快，适合训练阶段。
+2. momentum=0.99: 适用于小批量训练，滑动平均较慢，适合推理阶段。
+3. momentum=0.999: 适用于小批量训练，滑动平均更慢，适合推理阶段。
+理由：
+使用较大的momentum值（如0.9）时，BN层的均值和方差会更快地适应当前批次的数据分布，这在训练阶段是有利的，因为训练数据通常是动态变化的。
+使用较小的momentum值（如0.99或0.999）时，BN层的均值和方差会更慢地适应当前批次的数据分布，这在推理阶段是有利的，因为推理数据通常是静态的。
+举个例子，假设我们在训练一个图像分类模型，使用了BN层来加速训练。在训练阶段，我们可能会使用较大的批量大小（如256），此时可以使用momentum=0.9来快速适应当前批次的数据分布。
+而在推理阶段，我们可能会使用较小的批量大小（如1），此时可以使用momentum=0.99或0.999来更慢地适应当前批次的数据分布，以提高模型的稳定性和准确性。
+'''
 class ResidualBlock(nn.Module):
     def __init__(self, filters, momentum):
         super(ResidualBlock, self).__init__()
