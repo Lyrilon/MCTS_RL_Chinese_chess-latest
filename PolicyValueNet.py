@@ -127,7 +127,7 @@ class ResidualBlock(nn.Module):
         return out
 
 class PolicyValueNet(nn.Module):
-    def __init__(self, num_gpus, num_of_res_block=9):
+    def __init__(self, num_gpus, num_of_res_block=19):
         super(PolicyValueNet, self).__init__()
         print("init gpu net")
         self.save_path = "./gpu_models"
@@ -186,7 +186,9 @@ class PolicyValueNet(nn.Module):
         latest_ckpt = self._latest_checkpoint(self.checkpoint_dir)
         if latest_ckpt is not None:
             self.load(latest_ckpt)
-            print(latest_ckpt+" loaded")
+            print("Restored model from {}".format(latest_ckpt))
+        else:
+            print("No checkpoint found, starting from scratch.")
         print("**************************************************")
         print("Restore Took {} s".format(time.time() - start_time))
         print("**************************************************")
@@ -205,7 +207,8 @@ class PolicyValueNet(nn.Module):
             'model_state_dict': self.state_dict(),
             'optimizer_state_dict': self.optimizer.state_dict(),
             'global_step': self.global_step,
-        }, checkpoint_path)
+                    }, 
+        checkpoint_path)
 
     def load(self, checkpoint_path):
         checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
