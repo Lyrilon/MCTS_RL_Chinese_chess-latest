@@ -7,6 +7,9 @@ In English ,we see KARBNPCkarbnpc as king, advisor, rook, bishop, knight, pawn, 
 炮和兵的编码字母是 C和 P
 并且在遇到连续空位置的时候用数字表示，数字表示连续的空位置的个数
 在换行的时候使用"/"表示
+
+
+字符串编码->考虑黑方->展开数字占空位-> 14通道特征图->输入
 '''
 
 

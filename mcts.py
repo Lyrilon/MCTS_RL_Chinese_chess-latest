@@ -4,31 +4,81 @@ from asyncio import Future
 import asyncio
 from asyncio.queues import Queue
 import uvloop
-asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 from PolicyValueNet import input_preprocess
 import numpy as np
 import torch
-from chessboard import flip_policy
 from chessboard import action_label2i
 from tqdm import trange
 from sys import getsizeof
+'''
+大写红方小写黑方
+'''
+
+def create_action_labels():
+    """
+    函数里想要生成一个“广义”的可能走法列表（不考虑阻挡，也不细分红黑阵营区域）
+    """
+    labels_array = []
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    Advisor_labels = ['d7e8', 'e8d7', 'e8f9', 'f9e8', 'd0e1', 'e1d0', 'e1f2', 'f2e1',
+                      'd2e1', 'e1d2', 'e1f0', 'f0e1', 'd9e8', 'e8d9', 'e8f7', 'f7e8']
+    Bishop_labels = ['a2c4', 'c4a2', 'c0e2', 'e2c0', 'e2g4', 'g4e2', 'g0i2', 'i2g0',
+                     'a7c9', 'c9a7', 'c5e7', 'e7c5', 'e7g9', 'g9e7', 'g5i7', 'i7g5',
+                     'a2c0', 'c0a2', 'c4e2', 'e2c4', 'e2g0', 'g0e2', 'g4i2', 'i2g4',
+                     'a7c5', 'c5a7', 'c9e7', 'e7c9', 'e7g5', 'g5e7', 'g9i7', 'i7g9']
+
+    for l1 in range(9):
+        for n1 in range(10):
+            destinations = [(t, n1) for t in range(9)] + \
+                           [(l1, t) for t in range(10)] + \
+                           [(l1 + a, n1 + b) for (a, b) in
+                            [(-2, -1), (-1, -2), (-2, 1), (1, -2), (2, -1), (-1, 2), (2, 1), (1, 2)]]  # 马走日
+            for (l2, n2) in destinations:
+                if (l1, n1) != (l2, n2) and l2 in range(9) and n2 in range(10):
+                    move = letters[l1] + numbers[n1] + letters[l2] + numbers[n2]
+                    labels_array.append(move)
+#士走斜线
+    for p in Advisor_labels:
+        labels_array.append(p)
+#大象走田
+    for p in Bishop_labels:
+        labels_array.append(p)
+
+    return labels_array
+
+labels_array = create_action_labels()
+
+def flip_action_label(param):
+    def repl(x):
+        return "".join([(str(9 - int(a)) if a.isdigit() else a) for a in x])
+
+    return [repl(x) for x in param]
+
+
+# flipped_labels是镜像动作 
+flipped_labels = flip_action_label(labels_array)
+
+#unflipped_index是原动作在镜像动作中的索引，
+#可以理解为unflipped_index[i] = p意味着flipped_labels第i个动作在原动作列表中相同的动作索引是p
+unflipped_index = [labels_array.index(x) for x in flipped_labels]
+
+def flip_policy(prob):
+    prob = np.squeeze(prob) # .flatten()
+    return np.asarray([prob[ind] for ind in unflipped_index])
+
+
+# 把 Python 的异步事件循环策略设定为 uvloop 策略uvloop 是基于 libuv 开发的高性能事件循环，和 Python 标准库中的 asyncio 相比，它在性能上有显著提升。
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 c_PUCT = 5
-Nx=9
-Ny=10
-
 def validate_move(c, upper=True):
     if (c.isalpha()):
         if (upper == True):
-            if (c.islower()):
-                return True
-            else:
-                return False
+            return True if c.islower() else False
         else:
-            if (c.isupper()):
-                return True
-            else:
-                return False
+            return True if c.isupper() else False
     else:
         return True
 
@@ -48,10 +98,12 @@ def check_bounds(toY, toX):
     if toY < 0 or toX < 0:
         return False
 
-    if toY >= Ny or toX >= Nx:
+    if toY >= 10 or toX >= 9:
         return False
     return True
 
+
+# 将棋盘的字符串表示z展开为易于处理的格式
 def board_to_ezDecode(board):
     board = board.replace("2", "11")
     board = board.replace("3", "111")
@@ -63,6 +115,8 @@ def board_to_ezDecode(board):
     board = board.replace("9", "111111111")
     return board.split("/")
 
+
+# 模拟执行动作，再展开棋盘中移动
 def sim_do_action(in_action, in_state):
         x_trans = {'a':0, 'b':1, 'c':2, 'd':3, 'e':4, 'f':5, 'g':6, 'h':7, 'i':8}
         src = in_action[0:2]
@@ -98,6 +152,8 @@ def softmax(x):
     probs /= np.sum(probs)
     return probs
 
+
+# 90个位置label
 def create_pos_labels():
     rs = []
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
@@ -110,6 +166,7 @@ def create_pos_labels():
     return rs
 
 
+# 将90个位置label转化为棋盘坐标，reshape为9行10列，再转置
 board_pos_name = np.array(create_pos_labels()).reshape(9,10).transpose()
 
 def get_legal_moves(state, current_player):
@@ -139,7 +196,7 @@ def get_legal_moves(state, current_player):
 
                             moves.append(m)
 
-                        for toX in range(x + 1, Nx):
+                        for toX in range(x + 1, 9):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (board_positions[toY][toX].isalpha()):
                                 if (board_positions[toY][toX].isupper()):
@@ -158,7 +215,7 @@ def get_legal_moves(state, current_player):
 
                             moves.append(m)
 
-                        for toY in range(y + 1, Ny):
+                        for toY in range(y + 1, 10):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (board_positions[toY][toX].isalpha()):
                                 if (board_positions[toY][toX].isupper()):
@@ -178,7 +235,7 @@ def get_legal_moves(state, current_player):
 
                             moves.append(m)
 
-                        for toX in range(x + 1, Nx):
+                        for toX in range(x + 1, 9):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (board_positions[toY][toX].isalpha()):
                                 if (board_positions[toY][toX].islower()):
@@ -197,7 +254,7 @@ def get_legal_moves(state, current_player):
 
                             moves.append(m)
 
-                        for toY in range(y + 1, Ny):
+                        for toY in range(y + 1, 10):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (board_positions[toY][toX].isalpha()):
                                 if (board_positions[toY][toX].islower()):
@@ -335,7 +392,7 @@ def get_legal_moves(state, current_player):
                                     break
 
                         hits = False
-                        for toX in range(x + 1, Nx):
+                        for toX in range(x + 1, 9):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (hits == False):
                                 if (board_positions[toY][toX].isalpha()):
@@ -364,7 +421,7 @@ def get_legal_moves(state, current_player):
                                     break
 
                         hits = False
-                        for toY in range(y + 1, Ny):
+                        for toY in range(y + 1, 10):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (hits == False):
                                 if (board_positions[toY][toX].isalpha()):
@@ -393,7 +450,7 @@ def get_legal_moves(state, current_player):
                                     break
 
                         hits = False
-                        for toX in range(x + 1, Nx):
+                        for toX in range(x + 1, 9):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (hits == False):
                                 if (board_positions[toY][toX].isalpha()):
@@ -422,7 +479,7 @@ def get_legal_moves(state, current_player):
                                     break
 
                         hits = False
-                        for toY in range(y + 1, Ny):
+                        for toY in range(y + 1, 10):
                             m = board_pos_name[y][x] + board_pos_name[toY][toX]
                             if (hits == False):
                                 if (board_positions[toY][toX].isalpha()):
@@ -481,41 +538,64 @@ def get_legal_moves(state, current_player):
                 moves.append(board_pos_name[K_y][K_x] + board_pos_name[k_y][k_x])
 
         return moves
+'''
+# 测试get_legal_moves函数
+if __name__ == "__main__":
+    state = "RNBAKABNR/9/1C5C1/P1P1P1P1P/9/9/p1p1p1p1p/1c5c1/9/rnbakabnr"
+    current_player = 'b'
+    moves = get_legal_moves(state, current_player)
+    print("Possible moves for player {}: {}".format(current_player, moves))
 
+'''
 QueueItem = namedtuple("QueueItem", "feature future")
 
+# 1胜利方是红方，2胜利方是黑方，0平局
 def game_over(state):
     if state.find('K') == -1:
         return 1
     elif state.find('k') == -1:
         return 2
     return 0
+
+
+
+
+
 """
 N（访问次数）：node.N 表示该节点被访问的次数。在 MCTS 中，每次选择一个节点进行扩展和模拟时，该节点的访问次数就会增加。这个统计量在计算节点的平均价值（如 Q 值）以及使用 UCB 公式进行节点选择时起着重要作用。例如，UCB 公式中的一部分会考虑节点的访问次数来平衡探索和利用。
 W（累计价值）：node.W 表示该节点累计获得的价值。在模拟过程中，当从该节点开始进行一次模拟并得到一个结果（例如游戏的胜负结果）时，这个结果对应的价值会累加到 W 上。节点的平均价值 Q 通常通过 Q = W / N 来计算。
 """
 class Mcts():
     def __init__(self, in_state, policy_value_net, search_threads):
-        self.noise_eps = 0.25
-        self.dirichlet_alpha = 0.3    #0.03
-        self.p_ = (1 - self.noise_eps) * 1 + self.noise_eps * np.random.dirichlet([self.dirichlet_alpha])
-        self.root = leaf_node(None, self.p_, in_state)
-        self.c_puct = 5    #1.5
-        # self.policy_network = in_policy_network
-        self.policy_value_net = policy_value_net
-        self.node_lock = defaultdict(Lock)
-
-        self.virtual_loss = 3
-        self.now_expanding = set()
+        # === [1] 搜索树初始化 ===
+        self.root = leaf_node(None, None, in_state)  # 根节点将在 expand 时补全先验概率
         self.expanded = set()
-        self.cut_off_depth = 30
-        # self.QueueItem = namedtuple("QueueItem", "feature future")
-        self.thread_remain = asyncio.Semaphore(search_threads)
-        self.queue = Queue(search_threads)
-        self.loop = asyncio.get_event_loop()
-        self.running_simulation_num = 0
-        self.a= 2
-        self.exploration_mode = 1
+        self.now_expanding = set()
+
+        # === [2] 神经网络相关 ===
+        self.policy_value_net = policy_value_net
+        self.queue = Queue(search_threads)                 # 异步预测队列
+        self.loop = asyncio.get_event_loop()               # 异步事件循环
+        self.running_simulation_num = 0                    # 当前并发中的模拟数
+
+        # === [3] 并发控制 ===
+        self.thread_remain = asyncio.Semaphore(search_threads)  # 最大并发模拟线程数
+
+        # === [4] 蒙特卡罗树搜索超参数 ===
+        self.c_puct = 5                                     # PUCT 常数（探索-利用平衡）
+        self.cut_off_depth = 30                             # 最大深度限制（未实际使用）
+        self.virtual_loss = 3                               # 虚拟损失（避免并发路径重叠）
+
+        # === [5] 探索策略相关（Dirichlet 噪声）===
+        self.noise_eps = 0.25
+        self.dirichlet_alpha = 0.3
+        self.p_ = (1 - self.noise_eps) * 1 + self.noise_eps * np.random.dirichlet([self.dirichlet_alpha])
+        self.root.P = self.p_                               # 初始化根节点的先验概率
+
+        # === [6] 其它辅助结构 ===
+        self.node_lock = defaultdict(Lock)                  # 若使用线程锁可加锁节点
+        self.exploration_mode = 1                           # 是否启用探索增强
+
     async def  push_queue(self,features):
         future = self.loop.create_future()
         item = QueueItem(features,future)
@@ -540,9 +620,8 @@ class Mcts():
 
             net_input = input_preprocess(node.state,current_player)
             future = await self.push_queue(net_input)
-
             await future
-            # 作为value直接返回
+            # future是用net获得先验结果，包含了动作概率和价值
             action_probs,value = future.result()
             action_probs=action_probs.detach().numpy()
             # action_probs, value = self.forward(positions)
@@ -554,8 +633,6 @@ class Mcts():
             node.expand(moves,action_probs)
             self.now_expanding.remove(node)
             
-
-
             return value[0]*-1
         else:
             """
@@ -608,9 +685,14 @@ class Mcts():
     async def critic(self):
         """For better performance, queueing prediction requests and predict together in this worker.
         speed up about 45sec -> 15sec for example.
+
+        为了有更好的性能，队列预测请求并在这个工作线程中一起预测。
+        例如，速度提高了45秒->15秒。
+
+        具体来说，队列预测请求指的是
         """
         q = self.queue
-        margin = 10  # avoid finishing before other searches starting.
+        margin = 10  
         while self.running_simulation_num > 0 or margin > 0:
             if q.empty():
                 if margin > 0:
@@ -648,7 +730,7 @@ class Mcts():
             self.expanded.add(node)
 
         coroutine_set = []
-        for _ in range(search_round):
+        for _ in trange(search_round,desc="searcing round:"):
             task = self.tree_search(node,cur_player,restrict_round)
             coroutine_set.append(task)
         coroutine_set.append(self.critic())
@@ -686,9 +768,9 @@ class leaf_node(object):
         self.N = 0 # 访问次数
         self.v = 0 # backup value的值
         self.U = 0 # 探索项 U = c_puct·P·√(parent.N)/(1+N)，与 Q 共同决定选择节点
-        self.W = 0 # 累计价值和 
-        self.parent = in_parent
+        self.W = 0 # 累计价值t
         self.child = {}
+        self.parent = in_parent
         self.state = in_state
         
 
